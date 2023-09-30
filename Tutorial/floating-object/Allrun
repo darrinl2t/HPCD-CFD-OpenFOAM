@@ -1,0 +1,33 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # Run from this directory
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+# Set application name
+#application=$(getApplication)
+
+runApplication blockMesh
+runApplication topoSet
+runApplication subsetMesh -overwrite c0 -patch floatingObject
+
+restore0Dir
+
+runApplication setFields
+
+if  [ $# -eq 1 ]; then
+	runApplication decomposePar
+	runParallel interFoam
+else
+	runApplication interFoam
+fi
+
+touch results.foam
+
+# remove parenthesis () in history.dat
+sed -i "s/(/ /g" postProcessing/sixDoF_History/0/sixDoFRigidBodyState.dat 
+sed -i "s/)/ /g" postProcessing/sixDoF_History/0/sixDoFRigidBodyState.dat 
+sed -i 's/\t/     /g' postProcessing/sixDoF_History/0/sixDoFRigidBodyState.dat
+sed -i -e 's/ \{2,\}/ /g' postProcessing/sixDoF_History/0/sixDoFRigidBodyState.dat
+sed -i 's/ *$//' postProcessing/sixDoF_History/0/sixDoFRigidBodyState.dat
+#------------------------------------------------------------------------------
