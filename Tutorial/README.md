@@ -24,7 +24,7 @@ Once you land on the Gadi log-in node
 
 ```bash
 # Create and navigate to a directory under /scratch/nf47
-$ mkdir /scratch/nf47/$USER/ && cd "$_"
+$ mkdir -p /scratch/nf47/$USER/ && cd "$_"
 
 # Clone the repository
 $ git clone https://github.com/darrinl2t/HPCD-CFD-OpenFOAM.git
