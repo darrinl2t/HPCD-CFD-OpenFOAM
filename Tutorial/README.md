@@ -39,7 +39,7 @@ $ git clone https://github.com/darrinl2t/HPCD-CFD-OpenFOAM.git
 
 
 ```bash
-#To submit the job, navigate to dirctory build_CascadeLake
+#To submit the job, navigate to dirctory Tutorial/floating-object
 $qsub job_openfoam_tut_pbs.sh
 
 #Once the job ID returns, you query the job by
@@ -62,7 +62,7 @@ Compute Size: Small
 
 Project: nf47
 
-Storage: gdata/nf47+scratch/nf47
+Storage: scratch/nf47
 
 
 ```
